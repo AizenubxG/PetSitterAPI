@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: PetSitter API
-  version: "0.1" 
+  version: "0.1"
 paths:
   /users:
     post:
@@ -82,6 +82,42 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Job'
+              examples:
+                with-some-data:
+                  summary: With some data
+                  value:
+                    items:
+                    - id: 123
+                      creator_user_id: 345
+                      start_time: 2020-06-01T00:00:00Z
+                      end_time: 2020-06-02T00:00:00Z
+                      dog:
+                        name: Fido
+                        age: 3
+                        breed: Doberman
+                        size: medium
+                      activity: walk
+                    - id: 234
+                      creator_user_id: 345
+                      start_time: 2020-06-01T00:00:00Z
+                      end_time: 2020-06-03T00:00:00Z
+                      dog:
+                        name: Jesse
+                        age: 2
+                        breed: Rottweiler
+                        size: large
+                      activity: sit
+                    - id: 234
+                      creator_user_id: 345
+                      start_time: 2020-06-01T00:00:00Z
+                      end_time: 2020-06-02T00:00:00Z
+                      dog:
+                        name: Blossom
+                        age: 2
+                        breed: Rottweiler
+                        size: large
+                      activity: walk
+
   /jobs/{id}:
     parameters:
       - schema:
@@ -111,12 +147,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Job'
-    delete:
-      summary: Delete a Job
-      respones:
-        '204':
-          description: No Content
+              $ref: '#/components/schemas/Job'    
   /jobs/{id}/job-applications:
     parameters:
       - schema:
@@ -173,6 +204,70 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Job'
+  /users/{id}/job-applications:
+    parameters:
+      - schema:
+         type: integer
+        name: id
+        in: path
+        required: true
+    get:
+      summary: List of Job Applications for a Logged-in User
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/JobApplication"
+              examples:
+                two-items:
+                  summary: Two Job Applications
+                  value:
+                    items:
+                    - id: 123
+                      user_id: 123
+                      job_id: 123
+                      status: PENDING
+                    - id: 123
+                      user_id: 123
+                      job_id: 123
+                      status: COMPLETE
+                empty:
+                  summary: Zero Job Applications
+                  value:
+                    items: []
+                many:
+                  summary: Many Job Applications
+                  value:
+                    items:
+                    - id: 0
+                      user_id: 358
+                      jod_id: 4012
+                      status: COMPLETE
+                    - id: 1
+                      user_id: 3089
+                      job_id: 3902
+                      status: PENDING
+                    - id: 2
+                      user_id: 4040
+                      job_id: 5269
+                      status: PENDING
+                    - id: 3
+                      user_id: 5636
+                      job_id: 8420
+                      status: PENDING
+                # properties:
+                #   items:
+                #     type: array
+                #     items:
+                #       $ref: '#/components/schemas/JobApplication'
+                      
   /job-applications/{id}:
     parameters:
       - schema:
@@ -196,6 +291,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JobApplication'
+   
 components:
   schemas:
     User:
