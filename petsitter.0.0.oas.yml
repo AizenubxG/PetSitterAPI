@@ -29,7 +29,7 @@ paths:
   /users/{id}:
     parameters:
       - schema:
-          type: integer
+          type: string
         name: id
         in: path
         required: true
@@ -108,7 +108,7 @@ paths:
   /jobs/{id}:
     parameters:
       - schema:
-          type: integer
+          type: string
         name: id
         in: path
         required: true
@@ -152,7 +152,7 @@ paths:
   /jobs/{id}/job-applications:
     parameters:
       - schema:
-          type: integer
+          type: string
         name: id
         in: path
         required: true
@@ -193,7 +193,7 @@ paths:
   /users/{id}/jobs:
     parameters:
       - schema:
-          type: integer
+          type: string
         name: id
         in: path
         required: true
@@ -217,7 +217,7 @@ paths:
   /job-applications/{id}:
     parameters:
       - schema:
-          type: integer
+          type: string
         name: id
         in: path
         required: true
@@ -245,7 +245,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
         email:
           type: string
         password:
@@ -260,9 +260,9 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
         creator_user_id:
-          type: integer
+          type: string
         start_time:
           type: string
         end_time:
@@ -286,10 +286,10 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
         status:
           type: string
         user_id:
-          type: integer
+          type: string
         job_id:
-          type: integer
+          type: string
